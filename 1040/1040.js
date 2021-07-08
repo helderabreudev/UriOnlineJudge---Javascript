@@ -1,32 +1,29 @@
-var input = require('fs').readFileSync('stdin', 'utf-8');
+var input = require("fs").readFileSync("stdin", "utf8");
 
-let notas = input.split(' ');
+const notas = input.split("\n"); 
+const [N1, N2, N3, N4] = notas[0].split(' ')
+const N_exame = parseFloat(notas[1]);
 
-let N1 = parseFloat(notas.shift());
-let N2 = parseFloat(notas.shift());
-let N3 = parseFloat(notas.shift());
-let N4 = parseFloat(notas.shift());
-let notaExame = parseFloat(notas.pop());
+const media = ((N1 * 2) + (N2 * 3) + (N3 * 4) + (N4 * 1)) / 10;
 
-let media = (N1 * 2 + N2 * 3  + N3 * 4 + N4 * 1) / 10;
-let mediafinal = parseFloat((media + notaExame) / 2);
+console.log("Media: " + media.toFixed(1));
 
-console.log(`Media: ${media.toFixed(1)}`);
-
-if (media >= 7.0) {
-    console.log(`Aluno aprovado.`);
-} else if(media < 5.0) {
-    console.log(`Aluno reprovado.`);
-} else if (media >= 5.0 && media <= 6.9) {
-    console.log(`Aluno em exame.`);
-    console.log(`Nota do exame: ${notaExame.toFixed(1)}`);
-    if (mediafinal >= 5.0) {
-        console.log(`Aluno aprovado.`);
-        console.log(`Media final: ${mediafinal}`);
-    }
-    else {
-        console.log(`Aluno reprovado.`);
-        console.log(`Media final: ${mediafinal}`);
-    }
+if (media >= 7){
+    console.log("Aluno aprovado.");
 }
+else if(media < 5){
+    console.log("Aluno reprovado.");
+}
+else if(media >= 5 && media <= 6.9) {
+    console.log("Aluno em exame.");
+    console.log("Nota do exame: " + N_exame.toFixed(1));
+    const media2 = (media + N_exame) / 2;
+    if(media2 >= 5){
+        console.log("Aluno aprovado.");
 
+    }
+    else if(media2 <= 4.9){
+        console.log("Aluno reprovado.");
+    }
+    console.log("Media final: " + media2.toFixed(1));
+}
